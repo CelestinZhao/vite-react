@@ -50,4 +50,8 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    host: '127.0.0.1', // 指定服务器应该监听哪个 IP 地址
+    port: 5000, // 指定开发服务器端口
+  }
 })

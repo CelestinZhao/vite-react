@@ -5,6 +5,7 @@ import { get } from 'lodash';
 import reactLogo from '../../assets/react.svg';
 import viteLogo from '../../assets/vite.svg';
 import './index.css';
+import { download } from "../../utils/download.js";
 
 function App() {
 	const [count, setCount] = useState(0);
@@ -38,6 +39,7 @@ function App() {
 				Click on the Vite and React logos to learn more
 			</p>
 			<Button onClick={onClick}>{get(location, 'state.id') || '主页'}</Button>
+			<Button onClick={() => download([])}>下载</Button>
 		</>
 	);
 }

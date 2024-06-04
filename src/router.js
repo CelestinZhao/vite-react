@@ -1,6 +1,7 @@
 import React from 'react';
-import MainPage from './container/mainPage/index.js';
-import Demo from './container/demo/index.js';
+import MainPage from './container/mainPage';
+import Demo from './container/demo';
+import DragDemo from './container/dragDemo';
 
 const router = [
 	{
@@ -10,6 +11,10 @@ const router = [
 	{
 		path: '/demo',
 		element: <Demo />
+	},
+	{
+		path: '/dragDemo',
+		element: <DragDemo />
 	},
 ];
 

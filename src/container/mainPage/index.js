@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from 'tdesign-react';
 import { get } from 'lodash';
+import { download } from '../../utils/download';
 import reactLogo from '../../assets/react.svg';
 import viteLogo from '../../assets/vite.svg';
 import './index.css';
-import { download } from "../../utils/download.js";
 
 function App() {
 	const [count, setCount] = useState(0);

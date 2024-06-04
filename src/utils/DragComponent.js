@@ -1,17 +1,23 @@
 import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { noop } from 'lodash';
+
+/**
+ * props.direction String 拖拽方向
+ * props.getListStyle Function 获取list样式方法
+ * props.onDragEnd Function 拖拽结束后的回调
+ * @returns {JSX.Element}
+ * @constructor
+ */
 
 function DragComponent(props) {
-  const { items = [], callback } = props;
+  const { direction = 'vertical', getListStyle = noop } = props;
 
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;
     }
-    const newItems = Array.from(items);
-    const [removed] = newItems.splice(result.source.index, 1);
-    newItems.splice(result.destination.index, 0, removed);
-    callback && callback(newItems);
+    props.onDragEnd && props.onDragEnd(result);
   };
 
   return (
@@ -20,10 +26,10 @@ function DragComponent(props) {
       {
         !!props.children.length && (
           <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
+            <Droppable droppableId="droppable" direction={direction}>
               {
-                (provided) => (
-                  <div ref={provided.innerRef} {...provided.droppableProps}>
+                (provided, snapshot) => (
+                  <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)} {...provided.droppableProps}>
                     {
                       props.children.map((item, index) => (
                         <Draggable key={item.key} draggableId={item.key} index={index}>

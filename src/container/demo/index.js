@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Button, Space } from 'tdesign-react';
 import { get } from 'lodash';
 import axios from 'axios';
@@ -24,16 +24,16 @@ export const onFileChange = async (e) => {
 };
 
 function Demo() {
-	const location = useLocation();
+	// const location = useLocation();
 	const navigate = useNavigate();
 
 	const onClick = () => {
-		navigate('/', { state: { id: '主页' } });
+		navigate('/', { state: { id: 'demo' } });
 	}
 
 	return (
 		<Space direction="vertical">
-			<Button className={styles.demo} onClick={onClick}>{get(location, 'state.id')}</Button>
+			<Button className={styles.demo} onClick={onClick}>主页</Button>
 			<a href={quotaModule} download={'新增模板.xlsx'}>模板下载</a>
 			<input type="file" accept="image/*" onChange={onFileChange} multiple/>
 		</Space>

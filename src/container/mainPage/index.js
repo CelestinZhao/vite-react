@@ -7,7 +7,7 @@ import reactLogo from '../../assets/react.svg';
 import viteLogo from '../../assets/vite.svg';
 import styles from './index.module.less';
 
-function App() {
+function MainPage() {
 	const [count, setCount] = useState(0);
 	const navigate = useNavigate();
 	// const location = useLocation();
@@ -51,4 +51,4 @@ function App() {
 	);
 }
 
-export default App;
+export default MainPage;

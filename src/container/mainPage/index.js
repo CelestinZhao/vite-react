@@ -47,6 +47,56 @@ function MainPage() {
 				<Button onClick={() => download([])}>下载</Button>
 				<Button onClick={onClick2}>dragDemo</Button>
 			</Space>
+			<div>
+				<a href="https://vitejs.dev" target="_blank">
+					<img src={viteLogo} className={styles.logo} alt="Vite logo"/>
+				</a>
+				<a href="https://react.dev" target="_blank">
+					<img src={reactLogo} className={`${styles.logo} react`} alt="React logo"/>
+				</a>
+			</div>
+			<h1>Vite + React</h1>
+			<div className={styles.card}>
+				<button className={styles.count} onClick={() => setCount((count) => count + 1)}>
+					count is {count}
+				</button>
+				<p>
+					Edit <code>src/App.js</code> and save to test HMR
+				</p>
+			</div>
+			<p className={styles['read-the-docs']}>
+				Click on the Vite and React logos to learn more
+			</p>
+			<Space size="medium" direction="horizontal">
+				<Button onClick={onClick}>demo</Button>
+				<Button onClick={() => download([])}>下载</Button>
+				<Button onClick={onClick2}>dragDemo</Button>
+			</Space>
+			<div>
+				<a href="https://vitejs.dev" target="_blank">
+					<img src={viteLogo} className={styles.logo} alt="Vite logo"/>
+				</a>
+				<a href="https://react.dev" target="_blank">
+					<img src={reactLogo} className={`${styles.logo} react`} alt="React logo"/>
+				</a>
+			</div>
+			<h1>Vite + React</h1>
+			<div className={styles.card}>
+				<button className={styles.count} onClick={() => setCount((count) => count + 1)}>
+					count is {count}
+				</button>
+				<p>
+					Edit <code>src/App.js</code> and save to test HMR
+				</p>
+			</div>
+			<p className={styles['read-the-docs']}>
+				Click on the Vite and React logos to learn more
+			</p>
+			<Space size="medium" direction="horizontal">
+				<Button onClick={onClick}>demo</Button>
+				<Button onClick={() => download([])}>下载</Button>
+				<Button onClick={onClick2}>dragDemo</Button>
+			</Space>
 		</div>
 	);
 }

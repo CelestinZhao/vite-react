@@ -3,28 +3,26 @@ import { BrowserRouter, useRoutes } from 'react-router-dom';
 import { Layout } from 'tdesign-react';
 import router from './router';
 import SideBar from './SideBar';
-
-const { Header, Content, Aside } = Layout;
+import PageHeader from './PageHeader';
 
 function App() {
   const Router = () => useRoutes(router);
 
   return (
-    <Layout>
-      <Header className="site-layout-header">
-        <img src="https://tdesign.gtimg.com/site/baseLogo-light.png" height="28" alt="logo"/>
-      </Header>
-      <Layout className="site-layout">
-        <Aside width={'fit-content'} className="site-layout-aside">
-          <SideBar/>
-        </Aside>
-        <Content className="site-layout-content">
-          <BrowserRouter>
-            <Router/>
-          </BrowserRouter>
-        </Content>
+    <BrowserRouter>
+      <Layout>
+        <PageHeader />
+        <Layout className="site-layout">
+          <Layout.Aside width={'fit-content'} className="site-layout-aside">
+            <SideBar/>
+          </Layout.Aside>
+          <Layout.Content className="site-layout-content">
+              <Router/>
+          </Layout.Content>
+        </Layout>
       </Layout>
-    </Layout>
+    </BrowserRouter>
+
   );
 }
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Menu } from 'tdesign-react';
 import {
 	ViewListIcon,
@@ -13,9 +14,14 @@ import {
 
 const { MenuGroup, MenuItem, SubMenu } = Menu;
 
-function SideBar(props) {
+function SideBar() {
 	const [value, setValue] = useState('1');
 	const [collapsed, setCollapsed] = useState(false);
+	const navigate = useNavigate();
+
+	const onClick = ({ value }) => {
+		navigate(`/${value}`, { state: { id: '主页' } });
+	};
 
 	return (
 		<Menu
@@ -28,7 +34,7 @@ function SideBar(props) {
 			}
 		>
 			<MenuGroup title="主导航">
-				<MenuItem value="item1" icon={<AppIcon/>}>
+				<MenuItem value="demo" icon={<AppIcon/>} onClick={onClick}>
 				仪表盘
 				</MenuItem>
 			</MenuGroup>
@@ -39,10 +45,10 @@ function SideBar(props) {
 					<MenuItem value="2-1-3">筛选列表项</MenuItem>
 					<MenuItem value="2-1-4">树状筛选列表项</MenuItem>
 				</SubMenu>
-				<MenuItem value="2-2" icon={<Edit1Icon />}>
+				<MenuItem value="" icon={<Edit1Icon />} onClick={onClick}>
 					表单项
 				</MenuItem>
-				<MenuItem value="2-3" icon={<RootListIcon />}>
+				<MenuItem value="dragDemo" icon={<RootListIcon />} onClick={onClick}>
 					详情页
 				</MenuItem>
 				<MenuItem value="2-4" icon={<CheckIcon />}>

@@ -6,7 +6,7 @@ import { viteExternalsPlugin } from 'vite-plugin-externals';
 export default defineConfig({
   base: './',
   esbuild: {
-    loader: 'jsx',
+    loader: 'tsx',
     include: /src\/.*\.([jt])sx?$/,
     exclude: [],
   },

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Space } from 'tdesign-react';
 import DragComponent from '../../utils/DragComponent';
 import DragItem from './DragItem';
 
@@ -12,14 +13,28 @@ function DragDemo() {
 		setList(newList);
 	};
 
+	const getListStyle = () => ({
+		display: 'flex',
+		gap: 20,
+	});
+
 	return (
-		<DragComponent onDragEnd={onDragEnd}>
-			{
-				list.map((item, index) => (
-					<DragItem key={index} index={index} item={item} />
-				))
-			}
-		</DragComponent>
+		<Space size="large" direction="vertical">
+			<DragComponent onDragEnd={onDragEnd}>
+				{
+					list.map((item, index) => (
+						<DragItem key={index} index={index} item={item} />
+					))
+				}
+			</DragComponent>
+			<DragComponent onDragEnd={onDragEnd} direction="horizontal" getListStyle={getListStyle}>
+				{
+					list.map((item, index) => (
+						<DragItem key={index} index={index} item={item} />
+					))
+				}
+			</DragComponent>
+		</Space>
 	);
 }
 

@@ -13,10 +13,9 @@ import {
 } from '@dnd-kit/sortable';
 import { SortableItem } from './SortableItem';
 import { SortableOverlay } from './SortableOverlay';
-import './SortableList.css';
 
 
-export function SortableList({ items, onChange, renderItem }) {
+export function SortableList({ className, items, onChange, renderItem }) {
   const [active, setActive] = useState(null);
   const activeItem = useMemo(
     () => items.find((item) => item.id === active?.id),
@@ -46,7 +45,7 @@ export function SortableList({ items, onChange, renderItem }) {
       }}
     >
       <SortableContext items={items}>
-        <ul className="SortableList" role="application">
+        <ul className={className} role="application">
           {items.map((item) => (
             <React.Fragment key={item.id}>{renderItem(item)}</React.Fragment>
           ))}

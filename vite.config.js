@@ -15,6 +15,7 @@ export default defineConfig({
     react(),
     viteExternalsPlugin({
       xlsx: 'XLSX',
+      tesseract: 'Tesseract',
     }),
   ],
   optimizeDeps: {

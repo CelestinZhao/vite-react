@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Menu } from 'tdesign-react';
 import {
@@ -15,13 +15,18 @@ import {
 const { MenuGroup, MenuItem, SubMenu } = Menu;
 
 function SideBar() {
-	const [value, setValue] = useState('1');
+	const [value, setValue] = useState('');
 	const [collapsed, setCollapsed] = useState(false);
 	const navigate = useNavigate();
 
 	const onClick = ({ value }) => {
 		navigate(`/${value}`, { state: { id: '主页' } });
 	};
+
+	useEffect(() => {
+		const { pathname } = window.location;
+		setValue(pathname.split('/')[1]);
+	}, []);
 
 	return (
 		<Menu
@@ -34,25 +39,19 @@ function SideBar() {
 			}
 		>
 			<MenuGroup title="主导航">
-				<MenuItem value="demo" icon={<AppIcon/>} onClick={onClick}>
-				仪表盘
+				<MenuItem value="" icon={<AppIcon/>} onClick={onClick}>
+					主页
 				</MenuItem>
 			</MenuGroup>
 			<MenuGroup title="组件">
-				<SubMenu title="列表项" value="2-1" icon={<ServerIcon />}>
-					<MenuItem value="2-1-1">基础列表项</MenuItem>
-					<MenuItem value="2-1-2">卡片列表项</MenuItem>
-					<MenuItem value="2-1-3">筛选列表项</MenuItem>
-					<MenuItem value="2-1-4">树状筛选列表项</MenuItem>
-				</SubMenu>
-				<MenuItem value="" icon={<Edit1Icon />} onClick={onClick}>
-					表单项
+				<MenuItem value="demo" icon={<Edit1Icon />} onClick={onClick}>
+					demo项
 				</MenuItem>
 				<MenuItem value="dragDemo" icon={<RootListIcon />} onClick={onClick}>
-					详情页
+					拖拽demo
 				</MenuItem>
-				<MenuItem value="2-4" icon={<CheckIcon />}>
-					结果页
+				<MenuItem value="dndKit" icon={<CheckIcon />} onClick={onClick}>
+					dndKit
 				</MenuItem>
 			</MenuGroup>
 			<MenuGroup title="更多">

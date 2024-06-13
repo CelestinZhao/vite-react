@@ -22,7 +22,6 @@ function App() {
         </Layout>
       </Layout>
     </BrowserRouter>
-
   );
 }
 

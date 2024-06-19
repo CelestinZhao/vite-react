@@ -4,6 +4,8 @@ import { noop } from 'lodash';
 
 /**
  * props.direction String 拖拽方向 vertical/horizontal
+ * props.items Array 拖拽列表数据
+ * props.onChange Function 数据处理方法
  * props.getListStyle Function 获取list样式方法
  * props.onDragEnd Function 拖拽结束后的回调
  * @returns {JSX.Element}
@@ -11,13 +13,16 @@ import { noop } from 'lodash';
  */
 
 function DragComponent(props) {
-  const { direction = 'vertical', getListStyle = noop } = props;
+  const { items = [], direction = 'vertical', getListStyle = noop, onChange = noop } = props;
 
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;
     }
-    props.onDragEnd && props.onDragEnd(result);
+    const newList = Array.from(items);
+    const [removed] = newList.splice(result.source.index, 1);
+    newList.splice(result.destination.index, 0, removed);
+    onChange(newList);
   };
 
   return (

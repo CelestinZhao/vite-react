@@ -1,13 +1,15 @@
 import React from 'react';
+import { Button } from 'tdesign-react';
 import { ViewListIcon } from 'tdesign-icons-react';
+import styles from './index.module.css';
 
 function DragItem(props) {
 	const { index, item, dragHandleProps } = props;
 
 	return (
-		<div style={{ display: 'flex', gap: 10 }}>
+		<div className={styles.SortableItem}>
 			<div {...dragHandleProps} style={{ display: 'flex' }}>
-				<ViewListIcon style={{ display: 'block', fontSize: 18, margin: 'auto' }}/>
+				<Button variant="text" shape="square" icon={<ViewListIcon />}/>
 			</div>
 			<div>{index}. {item}</div>
 		</div>

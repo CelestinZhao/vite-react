@@ -1,3 +1,8 @@
+.list {
+  margin: 30px auto;
+  width: fit-content;
+}
+
 .SortableList {
   display: flex;
   flex-wrap: wrap;

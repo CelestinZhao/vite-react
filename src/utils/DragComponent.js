@@ -3,11 +3,10 @@ import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { noop } from 'lodash';
 
 /**
- * props.direction String 拖拽方向 vertical/horizontal
  * props.items Array 拖拽列表数据
+ * props.direction String 拖拽方向 vertical/horizontal
  * props.onChange Function 数据处理方法
  * props.getListStyle Function 获取list样式方法
- * props.onDragEnd Function 拖拽结束后的回调
  * @returns {JSX.Element}
  * @constructor
  */

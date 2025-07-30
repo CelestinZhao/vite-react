@@ -1,0 +1,129 @@
+.mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  border: 3px solid #0052d9;
+  filter: drop-shadow(0 0 2px #0052d9);
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  animation: border-flow 3s linear infinite;
+
+  &.selected {
+    opacity: 0.5;
+    background: #f0f0f0;
+  }
+
+  &.engine {
+    border: 3px solid #e37318;
+    filter: drop-shadow(0 0 2px #e37318);
+    animation: border-flow-engine 3s linear infinite;
+  }
+}
+
+.label {
+  position: relative;
+
+  .line {
+    z-index: 9;
+    position: absolute;
+    border-top: 1px dashed;
+  }
+
+  .label-tag {
+    z-index: 10;
+    justify-content: center;
+    width: 100px;
+    white-space: normal;
+    height: fit-content;
+    padding: 5px;
+    //text-align: center;
+    line-height: 16px;
+    color: rgba(0, 0, 0, 0.9);
+    background: rgb(188, 235, 220);
+
+    &.engine {
+      background: #edb151;
+    }
+
+    &.remove {
+      background: #d9d9d9;
+    }
+
+    .play-icon {
+      display: inline-block;
+      color: rgba(0, 0, 0, 0.9);
+      position: relative;
+      width: 20px;
+      height: 12px;
+      rotate: 90deg;
+
+      svg {
+        position: absolute;
+        top: -2px;
+        left: 3px;
+      }
+    }
+  }
+
+  .close-icon {
+    position: absolute;
+    right: -9px;
+    top: -9px;
+    display: flex;
+    border-radius: 9px;
+    background: white;
+    color: rgb(246, 75, 75);
+    cursor: pointer;
+  }
+}
+
+@keyframes border-flow-engine {
+  0% {
+    border-left-color: transparent;
+    border-top-color: #e37318;
+  }
+  25% {
+    border-top-color: transparent;
+    border-right-color: #e37318;
+  }
+  50% {
+    border-right-color: transparent;
+    border-bottom-color: #e37318;
+  }
+  75% {
+    border-bottom-color: transparent;
+    border-left-color: #e37318;
+  }
+  100% {
+    border-left-color: transparent;
+    border-top-color: #e37318;
+  }
+}
+
+@keyframes border-flow {
+  0% {
+    border-left-color: transparent;
+    border-top-color: #0052d9;
+  }
+  25% {
+    border-top-color: transparent;
+    border-right-color: #0052d9;
+  }
+  50% {
+    border-right-color: transparent;
+    border-bottom-color: #0052d9;
+  }
+  75% {
+    border-bottom-color: transparent;
+    border-left-color: #0052d9;
+  }
+  100% {
+    border-left-color: transparent;
+    border-top-color: #0052d9;
+  }
+}

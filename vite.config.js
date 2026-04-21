@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { viteExternalsPlugin } from 'vite-plugin-externals';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -17,9 +18,38 @@ export default defineConfig({
 			xlsx: 'XLSX',
 			tesseract: 'Tesseract',
 			lodash: '_',
+			react: 'React',
+			'react-dom': 'ReactDOM',
+			'react-dom/client': 'ReactDOM',
+			'tdesign-react': 'TDesign',
 		}),
-	],
+		// 仅在 ANALYZE=true 时启用可视化包体分析（npm run build:analyze）
+		process.env.ANALYZE === 'true' &&
+			visualizer({
+				filename: 'dist/stats.html',
+				open: true,
+				gzipSize: true,
+				brotliSize: true,
+			}),
+	].filter(Boolean),
 	optimizeDeps: {
+		// 显式声明需预构建的依赖，避免二次触发预构建导致的页面 reload
+		include: [
+			'react-router-dom',
+			'axios',
+			'tdesign-icons-react',
+			'@dnd-kit/core',
+			'@dnd-kit/sortable',
+			'@dnd-kit/utilities',
+			'@hello-pangea/dnd',
+			'react-markdown',
+			'remark-gfm',
+		],
+		// 排除走 CDN 的外部依赖，避免浪费预构建开销
+		// 注意：react / react-dom / tdesign-react 不要放这里，
+		// viteExternalsPlugin 已把其 import 重写成 window 全局，放 exclude 反而会触发
+		// "The entry point xxx cannot be marked as external" 报错
+		exclude: ['xlsx', 'tesseract', 'lodash'],
 		esbuildOptions: {
 			loader: {
 				'.js': 'jsx',
@@ -43,8 +73,21 @@ export default defineConfig({
 		},
 	},
 	build: {
+		target: 'es2020', // 现代浏览器目标，编译更快、产物更小
+		minify: 'esbuild', // 显式声明使用 esbuild 压缩（比 Terser 快 20~40x）
+		reportCompressedSize: false, // 跳过 gzip 体积统计，节省 1~3s 构建时间
+		chunkSizeWarningLimit: 1000, // 调整 chunk 大小警告阈值（分包后更合理）
 		rollupOptions: {
 			output: {
+				// 智能分包：按生态切分，提升浏览器缓存命中率
+				manualChunks: {
+					'react-vendor': ['react-router-dom'],
+					tdesign: ['tdesign-icons-react'],
+					dnd: ['@dnd-kit/core', '@dnd-kit/sortable', '@dnd-kit/utilities', '@hello-pangea/dnd'],
+					markdown: ['react-markdown', 'remark-gfm'],
+				},
+				chunkFileNames: 'assets/js/[name]-[hash].js',
+				entryFileNames: 'assets/js/[name]-[hash].js',
 				assetFileNames: (assetInfo) => {
 					if (/\.(jpe?g|png|svg)$/.test(assetInfo.name)) {
 						// 匹配资源文件后缀
@@ -62,6 +105,10 @@ export default defineConfig({
 		host: '127.0.0.1', // 指定服务器应该监听哪个 IP 地址
 		port: 5173, // 指定开发服务器端口（避开 macOS AirPlay 占用的 5000 端口）
 		strictPort: true, // 端口被占用时直接退出，不自动切换
+		// 预热高频模块，加快首次访问响应
+		warmup: {
+			clientFiles: ['./src/index.js', './src/App.js', './src/router.js'],
+		},
 	},
 	preview: {
 		host: '127.0.0.1',

@@ -19,7 +19,7 @@
 	border-top: 1px solid #e6e8ed;
 	width: 100%;
 	padding: 3px 3px 0 20px;
-	color: rgba(0, 0, 0, 0.5);
+	color: rgb(0, 0, 0, 0.5);
 }
 
 .reason-section {
@@ -29,7 +29,7 @@
 	border-radius: 6px;
 }
 
-.level-3:before {
+.level-3::before {
 	content: 'C、';
 }
 
@@ -86,7 +86,7 @@
 	border: 1px solid #dcdee3;
 	border-radius: 100px;
 	padding: 0 11px;
-	color: rgba(0, 0, 0, 0.8);
+	color: rgb(0, 0, 0, 0.8);
 }
 
 .smart-labels-bar .smart-labels a.active {

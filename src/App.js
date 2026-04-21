@@ -9,7 +9,12 @@ function App() {
 	const Router = () => useRoutes(router);
 
 	return (
-		<BrowserRouter>
+		<BrowserRouter
+			future={{
+				v7_relativeSplatPath: true,
+				v7_startTransition: true,
+			}}
+		>
 			<Layout>
 				<PageHeader />
 				<Layout className="site-layout">

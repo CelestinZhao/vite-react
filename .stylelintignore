@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+coverage
+
+# 第三方库
+**/*.min.css
+**/*.min.less
+
+# 资源
+public
+src/assets

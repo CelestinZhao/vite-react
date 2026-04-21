@@ -16,8 +16,8 @@
 	padding: 18px 20px;
 	background-color: #fff;
 	box-shadow:
-		0 0 0 1px rgba(63, 63, 68, 0.05),
-		0 1px 3px 0 rgba(34, 33, 81, 0.15);
+		0 0 0 1px rgb(63, 63, 68, 0.05),
+		0 1px 3px 0 rgb(34, 33, 81, 0.15);
 	border-radius: 4px;
 	box-sizing: border-box;
 	list-style: none;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, Space } from 'tdesign-react';
 // import { get } from 'lodash';
 import { download } from '../../utils/download';
@@ -24,10 +24,10 @@ function MainPage() {
 		<div className={styles['main-page']}>
 			<div>
 				<a href="https://vitejs.dev" target="_blank">
-					<img src={viteLogo} className={styles.logo} alt="Vite logo"/>
+					<img src={viteLogo} className={styles.logo} alt="Vite logo" />
 				</a>
 				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className={`${styles.logo} react`} alt="React logo"/>
+					<img src={reactLogo} className={`${styles.logo} react`} alt="React logo" />
 				</a>
 			</div>
 			<h1>Vite + React</h1>
@@ -39,9 +39,7 @@ function MainPage() {
 					Edit <code>src/App.js</code> and save to test HMR
 				</p>
 			</div>
-			<p className={styles['read-the-docs']}>
-				Click on the Vite and React logos to learn more
-			</p>
+			<p className={styles['read-the-docs']}>Click on the Vite and React logos to learn more</p>
 			<Space size="medium" direction="horizontal">
 				<Button onClick={onClick}>demo</Button>
 				<Button onClick={() => download([])}>下载</Button>
@@ -49,10 +47,10 @@ function MainPage() {
 			</Space>
 			<div>
 				<a href="https://vitejs.dev" target="_blank">
-					<img src={viteLogo} className={styles.logo} alt="Vite logo"/>
+					<img src={viteLogo} className={styles.logo} alt="Vite logo" />
 				</a>
 				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className={`${styles.logo} react`} alt="React logo"/>
+					<img src={reactLogo} className={`${styles.logo} react`} alt="React logo" />
 				</a>
 			</div>
 			<h1>Vite + React</h1>
@@ -64,9 +62,7 @@ function MainPage() {
 					Edit <code>src/App.js</code> and save to test HMR
 				</p>
 			</div>
-			<p className={styles['read-the-docs']}>
-				Click on the Vite and React logos to learn more
-			</p>
+			<p className={styles['read-the-docs']}>Click on the Vite and React logos to learn more</p>
 			<Space size="medium" direction="horizontal">
 				<Button onClick={onClick}>demo</Button>
 				<Button onClick={() => download([])}>下载</Button>
@@ -74,10 +70,10 @@ function MainPage() {
 			</Space>
 			<div>
 				<a href="https://vitejs.dev" target="_blank">
-					<img src={viteLogo} className={styles.logo} alt="Vite logo"/>
+					<img src={viteLogo} className={styles.logo} alt="Vite logo" />
 				</a>
 				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className={`${styles.logo} react`} alt="React logo"/>
+					<img src={reactLogo} className={`${styles.logo} react`} alt="React logo" />
 				</a>
 			</div>
 			<h1>Vite + React</h1>
@@ -89,9 +85,7 @@ function MainPage() {
 					Edit <code>src/App.js</code> and save to test HMR
 				</p>
 			</div>
-			<p className={styles['read-the-docs']}>
-				Click on the Vite and React logos to learn more
-			</p>
+			<p className={styles['read-the-docs']}>Click on the Vite and React logos to learn more</p>
 			<Space size="medium" direction="horizontal">
 				<Button onClick={onClick}>demo</Button>
 				<Button onClick={() => download([])}>下载</Button>

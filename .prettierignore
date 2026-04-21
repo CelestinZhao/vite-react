@@ -1,0 +1,22 @@
+# 构建产物
+dist
+dist-ssr
+build
+
+# 依赖
+node_modules
+
+# 锁文件
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# 编辑器/系统
+.idea
+.vscode
+.DS_Store
+
+# 其他
+*.min.js
+*.min.css
+coverage

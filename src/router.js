@@ -1,25 +1,31 @@
-import React from 'react';
-import MainPage from './container/mainPage';
-import Demo from './container/demo';
-import DragDemo from './container/dragDemo';
-import DndKit from './container/dndKit/index';
+import React, { lazy } from 'react';
+
+const MainPage = lazy(() => import('./container/mainPage'));
+const Demo = lazy(() => import('./container/demo'));
+const DragDemo = lazy(() => import('./container/dragDemo'));
+const DndKit = lazy(() => import('./container/dndKit'));
+const AiChat = lazy(() => import('./container/aiChat'));
 
 const router = [
 	{
 		path: '/',
-		element: <MainPage />
+		element: <MainPage />,
 	},
 	{
 		path: '/demo',
-		element: <Demo />
+		element: <Demo />,
 	},
 	{
 		path: '/dragDemo',
-		element: <DragDemo />
+		element: <DragDemo />,
 	},
 	{
 		path: '/dndKit',
-		element: <DndKit />
+		element: <DndKit />,
+	},
+	{
+		path: '/aiChat',
+		element: <AiChat />,
 	},
 ];
 

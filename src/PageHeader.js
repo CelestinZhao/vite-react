@@ -9,8 +9,8 @@ function PageHeader() {
 	return (
 		<Layout.Header className="site-layout-header">
 			<div className="left-area">
-				<img src="https://tdesign.gtimg.com/site/baseLogo-light.png" height="28" alt="logo"/>
-				<HomeIcon size={20} onClick={() => navigate('/')}/>
+				<img src="https://tdesign.gtimg.com/site/baseLogo-light.png" height="28" alt="logo" />
+				<HomeIcon size={20} onClick={() => navigate('/')} />
 			</div>
 		</Layout.Header>
 	);

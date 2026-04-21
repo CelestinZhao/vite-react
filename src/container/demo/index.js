@@ -18,9 +18,9 @@ function Demo() {
 		formData.append('file[0]', file.raw);
 		formData.append('length', 1);
 
-		return ({
+		return {
 			status: 'success',
-		});
+		};
 	};
 
 	const onClick = () => {
@@ -30,15 +30,19 @@ function Demo() {
 
 	return (
 		<Space direction="vertical" style={{ width: '100%' }}>
-			<Button className={styles.demo} onClick={onClick}>主页</Button>
-			<a href={quotaModule} download={'新增模板.xlsx'}>模板下载</a>
+			<Button className={styles.demo} onClick={onClick}>
+				主页
+			</Button>
+			<a href={quotaModule} download={'新增模板.xlsx'}>
+				模板下载
+			</a>
 			<Upload
 				requestMethod={requestMethod}
 				placeholder="图片orc识别"
 				onSuccess={() => message.success('识别成功')}
 				onFail={() => message.warning('识别失败')}
 			/>
-			<Textarea value={value} onChange={setValue} autosize={{ minRows: 10, maxRows: 15 }}/>
+			<Textarea value={value} onChange={setValue} autosize={{ minRows: 10, maxRows: 15 }} />
 		</Space>
 	);
 }

@@ -21,19 +21,25 @@ function DragDemo() {
 
 	return (
 		<div className={styles.list}>
-			<DragComponent items={list} onChange={setList} direction="vertical" getListStyle={getVerticalStyle} >
-				{
-					list.map((item, index) => (
-						<DragItem key={index} index={index} item={item} />
-					))
-				}
+			<DragComponent
+				items={list}
+				onChange={setList}
+				direction="vertical"
+				getListStyle={getVerticalStyle}
+			>
+				{list.map((item, index) => (
+					<DragItem key={index} index={index} item={item} />
+				))}
 			</DragComponent>
-			<DragComponent items={list2} onChange={setList2} direction="horizontal" getListStyle={getHorizontalStyle}>
-				{
-					list2.map((item, index) => (
-						<DragItem key={index} index={index} item={item} />
-					))
-				}
+			<DragComponent
+				items={list2}
+				onChange={setList2}
+				direction="horizontal"
+				getListStyle={getHorizontalStyle}
+			>
+				{list2.map((item, index) => (
+					<DragItem key={index} index={index} item={item} />
+				))}
 			</DragComponent>
 		</div>
 	);

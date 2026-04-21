@@ -9,11 +9,13 @@ function DragItem(props) {
 	return (
 		<div className={styles.SortableItem}>
 			<div {...dragHandleProps} style={{ display: 'flex' }}>
-				<Button variant="text" shape="square" icon={<ViewListIcon />}/>
+				<Button variant="text" shape="square" icon={<ViewListIcon />} />
 			</div>
-			<div>{index}. {item}</div>
+			<div>
+				{index}. {item}
+			</div>
 		</div>
-	)
+	);
 }
 
 export default DragItem;

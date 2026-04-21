@@ -12,51 +12,47 @@ import { noop } from 'lodash';
  */
 
 function DragComponent(props) {
-  const { items = [], direction = 'vertical', getListStyle = noop, onChange = noop } = props;
+	const { items = [], direction = 'vertical', getListStyle = noop, onChange = noop } = props;
 
-  const onDragEnd = (result) => {
-    if (!result.destination) {
-      return;
-    }
-    const newList = Array.from(items);
-    const [removed] = newList.splice(result.source.index, 1);
-    newList.splice(result.destination.index, 0, removed);
-    onChange(newList);
-  };
+	const onDragEnd = (result) => {
+		if (!result.destination) {
+			return;
+		}
+		const newList = Array.from(items);
+		const [removed] = newList.splice(result.source.index, 1);
+		newList.splice(result.destination.index, 0, removed);
+		onChange(newList);
+	};
 
-  return (
-    <div>
-      {!props.children.length && props.children}
-      {
-        !!props.children.length && (
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable" direction={direction}>
-              {
-                (provided, snapshot) => (
-                  <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)} {...provided.droppableProps}>
-                    {
-                      props.children.map((item, index) => (
-                        <Draggable key={item.key} draggableId={item.key} index={index}>
-                          {
-                            (provided) => (
-                              <div ref={provided.innerRef} {...provided.draggableProps}>
-                                {React.cloneElement(item, { dragHandleProps: provided.dragHandleProps })}
-                              </div>
-                            )
-                          }
-                        </Draggable>
-                      ))
-                    }
-                    {provided.placeholder}
-                  </div>
-                )
-              }
-            </Droppable>
-          </DragDropContext>
-        )
-      }
-    </div>
-  );
+	return (
+		<div>
+			{!props.children.length && props.children}
+			{!!props.children.length && (
+				<DragDropContext onDragEnd={onDragEnd}>
+					<Droppable droppableId="droppable" direction={direction}>
+						{(provided, snapshot) => (
+							<div
+								ref={provided.innerRef}
+								style={getListStyle(snapshot.isDraggingOver)}
+								{...provided.droppableProps}
+							>
+								{props.children.map((item, index) => (
+									<Draggable key={item.key} draggableId={item.key} index={index}>
+										{(provided) => (
+											<div ref={provided.innerRef} {...provided.draggableProps}>
+												{React.cloneElement(item, { dragHandleProps: provided.dragHandleProps })}
+											</div>
+										)}
+									</Draggable>
+								))}
+								{provided.placeholder}
+							</div>
+						)}
+					</Droppable>
+				</DragDropContext>
+			)}
+		</div>
+	);
 }
 
 export default DragComponent;

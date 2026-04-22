@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { viteExternalsPlugin } from 'vite-plugin-externals';
 import { visualizer } from 'rollup-plugin-visualizer';
+// import viteCompression from 'vite-plugin-compression';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -23,6 +24,20 @@ export default defineConfig({
 			'react-dom/client': 'ReactDOM',
 			'tdesign-react': 'TDesign',
 		}),
+		// // Gzip 预压缩：大于 10KB 的产物额外生成 .gz，Nginx 配 gzip_static on 直接读取
+		// viteCompression({
+		// 	algorithm: 'gzip',
+		// 	ext: '.gz',
+		// 	threshold: 10240,
+		// 	deleteOriginFile: false,
+		// }),
+		// // Brotli 预压缩：压缩率比 gzip 高 15%~25%，现代浏览器全面支持
+		// viteCompression({
+		// 	algorithm: 'brotliCompress',
+		// 	ext: '.br',
+		// 	threshold: 10240,
+		// 	deleteOriginFile: false,
+		// }),
 		// 仅在 ANALYZE=true 时启用可视化包体分析（npm run build:analyze）
 		process.env.ANALYZE === 'true' &&
 			visualizer({

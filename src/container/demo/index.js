@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, message, Space, Textarea, Upload } from 'tdesign-react';
 import { getOcr } from '../../utils/ocrUtils';
 import styles from './demo.module.less';
@@ -7,7 +7,6 @@ import quotaModule from './quotaModule.xlsx';
 
 function Demo() {
 	const [value, setValue] = useState('');
-	const location = useLocation();
 	const navigate = useNavigate();
 
 	const requestMethod = async (file) => {
@@ -26,7 +25,6 @@ function Demo() {
 	const onClick = () => {
 		navigate('/', { state: { id: 'demo' } });
 	};
-	console.log(location.search);
 
 	return (
 		<Space direction="vertical" style={{ width: '100%' }}>

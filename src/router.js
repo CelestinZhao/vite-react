@@ -1,32 +1,40 @@
-import React, { lazy } from 'react';
+import React from 'react';
+import { createBrowserRouter } from 'react-router-dom';
+import Layout from './Layout';
 
-const MainPage = lazy(() => import('./container/mainPage'));
-const Demo = lazy(() => import('./container/demo'));
-const DragDemo = lazy(() => import('./container/dragDemo'));
-const DndKit = lazy(() => import('./container/dndKit'));
-const AiChat = lazy(() => import('./container/aiChat'));
-
-const router = [
-	{
-		path: '/',
-		element: <MainPage />,
-	},
-	{
-		path: '/demo',
-		element: <Demo />,
-	},
-	{
-		path: '/dragDemo',
-		element: <DragDemo />,
-	},
-	{
-		path: '/dndKit',
-		element: <DndKit />,
-	},
-	{
-		path: '/aiChat',
-		element: <AiChat />,
-	},
+// 路由配置：新增页面只需在此数组中追加一项
+const routeConfig = [
+	{ path: '/', loader: () => import('./container/mainPage') },
+	{ path: '/demo', loader: () => import('./container/demo') },
+	{ path: '/dragDemo', loader: () => import('./container/dragDemo') },
+	{ path: '/dndKit', loader: () => import('./container/dndKit') },
+	{ path: '/aiChat', loader: () => import('./container/aiChat') },
 ];
+
+// 工厂函数：将 loader 转换为 v6.4 路由级 lazy 属性
+// v6.4 lazy 要求返回 { Component, loader?, action?, errorElement? } 形式
+const children = routeConfig.map(({ path, loader }) => ({
+	path,
+	lazy: async () => {
+		const mod = await loader();
+		return { Component: mod.default };
+	},
+}));
+
+const router = createBrowserRouter(
+	[
+		{
+			path: '/',
+			element: <Layout />,
+			children,
+		},
+	],
+	{
+		future: {
+			v7_relativeSplatPath: true,
+			v7_startTransition: true,
+		},
+	}
+);
 
 export default router;

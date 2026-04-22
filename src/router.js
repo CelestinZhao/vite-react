@@ -21,20 +21,12 @@ const children = routeConfig.map(({ path, loader }) => ({
 	},
 }));
 
-const router = createBrowserRouter(
-	[
-		{
-			path: '/',
-			element: <Layout />,
-			children,
-		},
-	],
+const router = createBrowserRouter([
 	{
-		future: {
-			v7_relativeSplatPath: true,
-			v7_startTransition: true,
-		},
-	}
-);
+		path: '/',
+		element: <Layout />,
+		children,
+	},
+]);
 
 export default router;

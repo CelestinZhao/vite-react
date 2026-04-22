@@ -78,12 +78,17 @@ export default defineConfig({
 		chunkSizeWarningLimit: 1000, // 调整 chunk 大小警告阈值（分包后更合理）
 		rollupOptions: {
 			output: {
-				// 智能分包：按生态切分，提升浏览器缓存命中率
+				// 智能分包：按生态 + 使用场景切分，提升浏览器缓存命中率
+				// 原则：不同路由独占的库不要合并；多路由共享的库才显式 vendor 化
 				manualChunks: {
+					// 路由工具类，所有页面都会用
 					'react-vendor': ['react-router-dom'],
+					// 图标库，全站公用
 					tdesign: ['tdesign-icons-react'],
-					dnd: ['@dnd-kit/core', '@dnd-kit/sortable', '@dnd-kit/utilities', '@hello-pangea/dnd'],
-					markdown: ['react-markdown', 'remark-gfm'],
+					// 拖拽库拆成两个独立 chunk：不同页面按需加载，避免加载不用的那套
+					'dnd-kit': ['@dnd-kit/core', '@dnd-kit/sortable', '@dnd-kit/utilities'],
+					'dnd-pangea': ['@hello-pangea/dnd'],
+					markdown: ['react-markdown'],
 				},
 				chunkFileNames: 'assets/js/[name]-[hash].js',
 				entryFileNames: 'assets/js/[name]-[hash].js',
@@ -94,6 +99,10 @@ export default defineConfig({
 					}
 					if (/\.(xlsx?|csv)$/.test(assetInfo.name)) {
 						return `assets/file/[name]-[hash].[ext]`;
+					}
+					if (/\.css$/.test(assetInfo.name)) {
+						// CSS 文件（含 .css / .less / CSS Modules 编译产物）统一输出到 assets/css
+						return `assets/css/[name]-[hash].[ext]`;
 					}
 					return `assets/[name]-[hash].[ext]`; // 不匹配的资源文件存放至assets，以[name]-[hash].[ext]命名规则
 				},

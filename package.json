@@ -10,6 +10,7 @@
 		"build:analyze": "cross-env ANALYZE=true vite build",
 		"lint": "eslint . --report-unused-disable-directives --max-warnings 0",
 		"type-check": "tsc --noEmit",
+		"audit:ci": "npm audit --audit-level=critical",
 		"stylelint": "stylelint \"src/**/*.{css,less}\"",
 		"stylelint:fix": "stylelint \"src/**/*.{css,less}\" --fix",
 		"format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,less,md}\"",
@@ -21,14 +22,16 @@
 		"@dnd-kit/sortable": "^8.0.0",
 		"@dnd-kit/utilities": "^3.2.2",
 		"@hello-pangea/dnd": "^16.6.0",
-		"axios": "^1.15.1",
+		"lodash": "^4.17.21",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-markdown": "^10.1.0",
 		"react-router-dom": "^6.23.1",
 		"remark-gfm": "^4.0.1",
 		"tdesign-icons-react": "^0.3.5",
-		"tdesign-react": "^1.16.8"
+		"tdesign-react": "^1.16.8",
+		"tesseract.js": "^5.1.1",
+		"xlsx": "^0.18.5"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.39.4",

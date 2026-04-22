@@ -16,7 +16,7 @@ export default defineConfig({
 		react(),
 		viteExternalsPlugin({
 			xlsx: 'XLSX',
-			tesseract: 'Tesseract',
+			'tesseract.js': 'Tesseract',
 			lodash: '_',
 			react: 'React',
 			'react-dom': 'ReactDOM',
@@ -36,7 +36,6 @@ export default defineConfig({
 		// 显式声明需预构建的依赖，避免二次触发预构建导致的页面 reload
 		include: [
 			'react-router-dom',
-			'axios',
 			'tdesign-icons-react',
 			'@dnd-kit/core',
 			'@dnd-kit/sortable',
@@ -49,7 +48,7 @@ export default defineConfig({
 		// 注意：react / react-dom / tdesign-react 不要放这里，
 		// viteExternalsPlugin 已把其 import 重写成 window 全局，放 exclude 反而会触发
 		// "The entry point xxx cannot be marked as external" 报错
-		exclude: ['xlsx', 'tesseract', 'lodash'],
+		exclude: ['xlsx', 'tesseract.js', 'lodash'],
 		esbuildOptions: {
 			loader: {
 				'.js': 'jsx',

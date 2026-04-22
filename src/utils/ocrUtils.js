@@ -1,4 +1,4 @@
-import { createWorker } from 'tesseract';
+import { createWorker } from 'tesseract.js';
 import { get } from 'lodash';
 
 export const getOcr = async (url) => {

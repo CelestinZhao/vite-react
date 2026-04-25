@@ -9,6 +9,7 @@ const routeConfig = [
 	{ path: '/dragDemo', loader: () => import('./container/dragDemo') },
 	{ path: '/dndKit', loader: () => import('./container/dndKit') },
 	{ path: '/aiChat', loader: () => import('./container/aiChat') },
+	{ path: '/waterfall', loader: () => import('./container/waterfall') },
 ];
 
 // 工厂函数：将 loader 转换为 v6.4 路由级 lazy 属性

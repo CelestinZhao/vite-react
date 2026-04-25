@@ -59,6 +59,9 @@ function SideBar() {
 				<MenuItem value="aiChat" icon={<UserIcon />} onClick={onClick}>
 					AI 聊天
 				</MenuItem>
+				<MenuItem value="waterfall" icon={<UserIcon />} onClick={onClick}>
+					瀑布流
+				</MenuItem>
 			</MenuGroup>
 		</Menu>
 	);

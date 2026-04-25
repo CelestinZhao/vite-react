@@ -1,0 +1,88 @@
+.page {
+	display: flex;
+	flex-direction: column;
+	/* 占满父容器（Layout 的 .site-layout-content），父容器已是 calc(100vh - header) */
+	height: calc(100% + 40px);
+	min-height: 600px;
+	margin: -20px; /* 抵消 .site-layout-content 的 20px padding，让瀑布流铺满 */
+	background: #f7f7f8;
+	box-sizing: border-box;
+	overflow: hidden; /* 防止子元素意外溢出影响父级布局 */
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 24px;
+	background: #fff;
+	border-bottom: 1px solid #eee;
+	flex-shrink: 0;
+	box-sizing: border-box;
+}
+
+.logo {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 600;
+	color: #222;
+}
+
+.subtitle {
+	font-size: 12px;
+	color: #999;
+}
+
+.scroller {
+	flex: 1;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding: 16px;
+	scroll-behavior: smooth;
+	box-sizing: border-box;
+}
+
+.canvas {
+	position: relative;
+	margin: 0 auto;
+	max-width: 100%;
+}
+
+.cardWrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	will-change: transform;
+}
+
+.footer {
+	text-align: center;
+	padding: 24px 0 40px;
+	color: #999;
+	font-size: 13px;
+}
+
+.loading::after {
+	content: '';
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin-left: 8px;
+	border: 2px solid #ddd;
+	border-top-color: #ff2442;
+	border-radius: 50%;
+	animation: spin 0.8s linear infinite;
+	vertical-align: middle;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.end {
+	display: inline-block;
+	padding: 8px 16px;
+	color: #bbb;
+}

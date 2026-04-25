@@ -2,33 +2,18 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Card from './Card';
 import useWaterfall from './useWaterfall';
 import { fetchList } from './mock';
+import {
+	CARD_FIXED_EXTRA,
+	TITLE_LINE_HEIGHT,
+	TITLE_MAX_LINES,
+	TITLE_AVG_CHAR_WIDTH,
+	OVERSCAN,
+	LOAD_MORE_THRESHOLD,
+	GAP,
+	PAGE_SIZE,
+	calcColumnCount,
+} from './constants';
 import styles from './index.module.less';
-
-// 卡片中"非标题区域"的固定高度估算
-//   = 上下内边距 (10 + 12) + 标题底部 margin (8) + 作者栏高度 (20) + 缓冲 (~6)
-const CARD_FIXED_EXTRA = 56;
-// 标题相关参数
-const TITLE_FONT_SIZE = 14; // 与 css 保持一致
-const TITLE_LINE_HEIGHT = TITLE_FONT_SIZE * 1.4; // 19.6px
-const TITLE_MAX_LINES = 2;
-// 中文字符按字号近似宽度（中文≈字号宽度），稍微留一点冗余
-const TITLE_AVG_CHAR_WIDTH = TITLE_FONT_SIZE * 1.0;
-
-// 列数根据容器宽度自适应
-function calcColumnCount(width) {
-	if (width < 480) return 2;
-	if (width < 768) return 3;
-	if (width < 1100) return 4;
-	if (width < 1500) return 5;
-	return 6;
-}
-
-// 虚拟滚动的上下缓冲区（px），避免快速滚动时出现白屏
-const OVERSCAN = 400;
-// 滚动到底部触发加载的阈值
-const LOAD_MORE_THRESHOLD = 600;
-const GAP = 12;
-const PAGE_SIZE = 24;
 
 function Waterfall() {
 	// ================= 容器尺寸监听 =================

@@ -1,6 +1,8 @@
 import React from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import { noop } from 'lodash';
+import * as _ from 'lodash';
+
+const { noop } = _;
 
 /**
  * props.items Array 拖拽列表数据

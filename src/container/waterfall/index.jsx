@@ -4,9 +4,15 @@ import useWaterfall from './useWaterfall';
 import { fetchList } from './mock';
 import styles from './index.module.less';
 
-// 固定卡片"非图片"区域的高度估算（标题两行 + 内边距 + 作者栏）
-// 用于在布局阶段提前计算卡片总高度，无需等图片加载
-const CARD_EXTRA_HEIGHT = 76;
+// 卡片中"非标题区域"的固定高度估算
+//   = 上下内边距 (10 + 12) + 标题底部 margin (8) + 作者栏高度 (20) + 缓冲 (~6)
+const CARD_FIXED_EXTRA = 56;
+// 标题相关参数
+const TITLE_FONT_SIZE = 14; // 与 css 保持一致
+const TITLE_LINE_HEIGHT = TITLE_FONT_SIZE * 1.4; // 19.6px
+const TITLE_MAX_LINES = 2;
+// 中文字符按字号近似宽度（中文≈字号宽度），稍微留一点冗余
+const TITLE_AVG_CHAR_WIDTH = TITLE_FONT_SIZE * 1.0;
 
 // 列数根据容器宽度自适应
 function calcColumnCount(width) {
@@ -83,8 +89,30 @@ function Waterfall() {
 	}, []);
 
 	// ================= 瀑布流布局 =================
-	const getExtraHeight = useCallback(() => CARD_EXTRA_HEIGHT, []);
-	const { positions, containerHeight, columnWidth } = useWaterfall(items, {
+	// 提前算一份 columnWidth（与 useWaterfall 内部口径保持一致），
+	// 供 getExtraHeight 使用来估算标题行数（1 行或 2 行）。
+	const columnWidth = useMemo(() => {
+		if (!size.width || !columnCount) return 0;
+		return (size.width - GAP * (columnCount - 1)) / columnCount;
+	}, [size.width, columnCount]);
+
+	// 根据标题字符数 + 当前列宽估算标题占 1 行还是 2 行（最多 2 行省略），
+	// 从而提前算出准确的卡片总高度，让布局更贴合真实渲染结果。
+	const getExtraHeight = useCallback(
+		(item) => {
+			const title = item?.title || '';
+			// 当前列内容宽度 = columnWidth - 左右 padding(12*2)
+			const titleContentWidth = Math.max(0, columnWidth - 24);
+			const charsPerLine = Math.max(1, Math.floor(titleContentWidth / TITLE_AVG_CHAR_WIDTH));
+			const estimatedLines = Math.min(
+				TITLE_MAX_LINES,
+				Math.max(1, Math.ceil(title.length / charsPerLine)),
+			);
+			return CARD_FIXED_EXTRA + estimatedLines * TITLE_LINE_HEIGHT;
+		},
+		[columnWidth],
+	);
+	const { positions, containerHeight } = useWaterfall(items, {
 		containerWidth: size.width,
 		columnCount,
 		gap: GAP,

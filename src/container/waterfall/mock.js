@@ -122,4 +122,3 @@ if (import.meta.hot) {
 		window.location.reload();
 	});
 }
-

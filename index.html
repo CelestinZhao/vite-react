@@ -55,13 +55,18 @@
       2. 使用 defer：并行下载、不阻塞 HTML 解析、严格按声明顺序执行
          由于规范保证 defer 脚本按项顺序执行，react → react-dom → tdesign 的依赖顺序不变
          且 module 脚本总在所有 defer 脚本之后执行，业务代码运行时全部全局变量已就绪
+      3. 这些 CDN 仅在生产构建时生效，dev 模式由 vite.config.js 的 transformIndexHtml 钩子剥离，
+         目的是让 react / react-dom 走本地 node_modules，以便 @vitejs/plugin-react
+         的 Fast Refresh（react-refresh）能完整注入并生效。
     -->
+    <!--PROD_CDN_START-->
     <script defer crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
     <script defer crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
     <script defer src="https://unpkg.com/tdesign-react/dist/tdesign.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <script defer src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <!--PROD_CDN_END-->
     <!-- 业务入口：Vite 构建时会自动将其注入到此处后，执行时机紧随所有 defer 之后 -->
     <script type="module" src="/src/index.js"></script>
   </head>

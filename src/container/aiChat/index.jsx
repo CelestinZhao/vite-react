@@ -8,6 +8,7 @@ import { ClearIcon, ChatMessageIcon } from 'tdesign-icons-react';
 import ModelOrchestrator from './components/ModelOrchestrator';
 import MessageList from './components/MessageList';
 import ChatInput from './components/ChatInput';
+import ConversationList from './components/ConversationList';
 import { useSSEChat } from './hooks/useSSEChat';
 import { DEFAULT_MODEL_CONFIG } from './utils/constants';
 import styles from './index.module.less';
@@ -17,22 +18,45 @@ const AiChat = () => {
 	const [modelConfig, setModelConfig] = useState(DEFAULT_MODEL_CONFIG);
 
 	// SSE 对话 Hook
-	const { messages, loading, sendMessage, abort, clearMessages, regenerate } = useSSEChat();
+	const {
+		conversationId,
+		messages,
+		loading,
+		sendMessage,
+		abort,
+		clearMessages,
+		regenerate,
+		loadConversation,
+		conversations,
+		conversationsLoading,
+		fetchConversationList,
+		deleteConversation,
+	} = useSSEChat();
 
 	// 发送消息（携带模型配置）
 	const handleSend = (payload) => {
 		sendMessage({ ...payload, modelConfig });
 	};
 
-	// 清空对话
-	const handleClear = () => {
+	// 新建会话（清空当前 UI 状态，下次发送即开新会话）
+	const handleNewChat = () => {
 		clearMessages();
 	};
 
 	return (
 		<div className={styles.aiChatPage}>
-			{/* 左侧：模型编排面板 */}
+			{/* 左侧：历史会话 + 模型编排 */}
 			<aside className={styles.sidebar}>
+				<ConversationList
+					conversations={conversations}
+					activeId={conversationId}
+					loading={conversationsLoading}
+					onSelect={loadConversation}
+					onDelete={deleteConversation}
+					onNew={handleNewChat}
+					onRefresh={fetchConversationList}
+				/>
+				<div className={styles.sidebarDivider} />
 				<ModelOrchestrator config={modelConfig} onChange={setModelConfig} />
 			</aside>
 
@@ -46,8 +70,13 @@ const AiChat = () => {
 						<span className={styles.headerSubTitle}>当前模型：{modelConfig.model}</span>
 					</div>
 					<div className={styles.headerRight}>
-						<Tooltip content="清空对话">
-							<Button variant="text" icon={<ClearIcon />} onClick={handleClear} disabled={loading}>
+						<Tooltip content="清空对话（开启新会话）">
+							<Button
+								variant="text"
+								icon={<ClearIcon />}
+								onClick={handleNewChat}
+								disabled={loading}
+							>
 								清空
 							</Button>
 						</Tooltip>

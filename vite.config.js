@@ -153,6 +153,14 @@ export default defineConfig(({ command }) => {
 			warmup: {
 				clientFiles: ['./src/index.js', './src/App.js', './src/router.js'],
 			},
+			// 代理到 Koa Mock 服务（mock-server/server.js，默认 3001 端口）
+			// 注意：SSE 接口依赖流式转发，Vite 基于 http-proxy 默认即支持，无需额外配置
+			proxy: {
+				'/api': {
+					target: 'http://127.0.0.1:3001',
+					changeOrigin: true,
+				},
+			},
 		},
 		preview: {
 			host: '127.0.0.1',

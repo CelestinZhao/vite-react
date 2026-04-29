@@ -6,6 +6,9 @@
 	"scripts": {
 		"start": "vite",
 		"start:force": "vite --force",
+		"mock": "node mock-server-node/server.js",
+		"mock:install": "cd mock-server-node && npm install",
+		"dev": "node --experimental-vm-modules -e \"import('child_process').then(({spawn})=>{const o={stdio:'inherit',shell:true};spawn('npm',['run','mock'],o);spawn('npm',['run','start'],o);})\"",
 		"build": "vite build",
 		"build:analyze": "cross-env ANALYZE=true vite build",
 		"lint": "eslint . --report-unused-disable-directives --max-warnings 0",

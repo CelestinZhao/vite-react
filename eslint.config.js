@@ -111,12 +111,13 @@ export default [
     },
   },
 
-  // 构建/工具配置文件：运行于 Node.js 环境，需要 Node 全局变量（process、__dirname 等）
+  // 构建/工具配置文件 & Node 服务端脚本：运行于 Node.js 环境，需要 Node 全局变量（process、__dirname 等）
   {
     files: [
       'vite.config.{js,ts,mjs,cjs}',
       '*.config.{js,ts,mjs,cjs}',
       'scripts/**/*.{js,ts,mjs,cjs}',
+      'mock-server/**/*.{js,ts,mjs,cjs}',
     ],
     languageOptions: {
       globals: {

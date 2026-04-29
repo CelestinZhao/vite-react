@@ -1,0 +1,65 @@
+server:
+  port: 3001
+
+spring:
+  profiles:
+    active: local                         # 默认激活 local，对应 application-local.yml（gitignore）
+  application:
+    name: mock-server-java
+
+  # ---- 数据库 ----
+  datasource:
+    url: jdbc:sqlite:./data/chat.db
+    driver-class-name: org.sqlite.JDBC
+    # SQLite 单连接即可，避免文件锁冲突
+    hikari:
+      maximum-pool-size: 1
+      minimum-idle: 1
+
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update                    # 启动时自动建表
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: false
+        show_sql: false
+
+  # ---- Jackson ----
+  jackson:
+    default-property-inclusion: non_null  # 空值字段不序列化，保持与 Node 版一致
+    serialization:
+      write-dates-as-timestamps: false
+
+  # ---- WebFlux: 请求体大小 ----
+  codec:
+    max-in-memory-size: 5MB
+
+# ---- 业务配置 ----
+aichat:
+  # 上下文窗口：每次请求从 DB 取最近 N 条消息
+  context-message-limit: 20
+  # SSE 心跳间隔（秒）
+  sse-heartbeat-seconds: 15
+
+# ---- Provider 配置（key 从 application-local.yml 读取，仓库中默认为空） ----
+providers:
+  openai:
+    base-url: https://api.openai.com/v1
+    api-key: ${OPENAI_API_KEY:}
+  anthropic:
+    base-url: https://api.anthropic.com
+    api-key: ${ANTHROPIC_API_KEY:}
+  hunyuan:
+    base-url: https://api.hunyuan.cloud.tencent.com/v1
+    api-key: ${HUNYUAN_API_KEY:}
+  deepseek:
+    base-url: https://api.deepseek.com/v1
+    api-key: ${DEEPSEEK_API_KEY:}
+
+logging:
+  level:
+    root: INFO
+    com.example.aichat: INFO
+    org.hibernate.SQL: WARN

@@ -21,6 +21,177 @@
 	padding: 16px;
 }
 
+/* 历史会话 与 模型编排之间的分隔线 */
+.sidebarDivider {
+	height: 1px;
+	background: #f0f0f0;
+	margin: 16px 0;
+}
+
+/* ========== 历史会话列表 ========== */
+.convPanel {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.convHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.convHeaderTitle {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 14px;
+	font-weight: 600;
+	color: rgb(0, 0, 0, 0.85);
+}
+
+.convHeaderIcon {
+	font-size: 16px;
+	color: var(--td-brand-color);
+}
+
+.convCount {
+	min-width: 18px;
+	height: 18px;
+	padding: 0 6px;
+	font-size: 11px;
+	line-height: 18px;
+	text-align: center;
+	color: rgb(0, 0, 0, 0.55);
+	background: #f0f2f5;
+	border-radius: 9px;
+	font-weight: 500;
+}
+
+.convHeaderActions {
+	display: inline-flex;
+	gap: 4px;
+}
+
+.convNewBtn {
+	margin-bottom: 4px;
+}
+
+.convList {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	max-height: 40vh;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		width: 4px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: rgb(0, 0, 0, 0.12);
+		border-radius: 2px;
+	}
+}
+
+.convEmpty {
+	padding: 20px 0;
+	text-align: center;
+	color: rgb(0, 0, 0, 0.4);
+	font-size: 12px;
+}
+
+.convItem {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 10px;
+	border-radius: 6px;
+	cursor: pointer;
+	transition:
+		background 0.15s,
+		color 0.15s;
+
+	&:hover {
+		background: #f5f7fa;
+
+		.convItemDelete {
+			opacity: 1;
+			pointer-events: auto;
+		}
+	}
+}
+
+.convItemActive {
+	background: rgba(0, 82, 217, 0.08);
+
+	.convItemTitle {
+		color: var(--td-brand-color);
+		font-weight: 600;
+	}
+}
+
+.convItemMain {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.convItemTitle {
+	font-size: 13px;
+	color: rgb(0, 0, 0, 0.85);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.convItemMeta {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 11px;
+	color: rgb(0, 0, 0, 0.45);
+}
+
+.convModelTag {
+	padding: 0 4px;
+	background: #f0f2f5;
+	border-radius: 3px;
+	color: rgb(0, 0, 0, 0.55);
+	max-width: 90px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.convTime {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.convItemDelete {
+	flex-shrink: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 4px;
+	color: rgb(0, 0, 0, 0.45);
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.2s;
+
+	&:hover {
+		background: rgba(227, 77, 89, 0.1);
+		color: #e34d59;
+	}
+}
+
 .orchestrator {
 	display: flex;
 	flex-direction: column;

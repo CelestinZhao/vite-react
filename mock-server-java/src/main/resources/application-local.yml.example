@@ -1,0 +1,16 @@
+# 本地真实密钥配置模板（对应 Node 版 .env.example）
+# 使用方法：
+#   cp application-local.yml.example application-local.yml
+#   然后填入真实 key（仓库已通过 .gitignore 屏蔽 application-local.yml）
+#
+# 不配置任何 key 也能正常启动，所有请求自动降级到 MockProvider，开箱即用。
+
+providers:
+  openai:
+    api-key: ""           # OpenAI 官方 key
+  anthropic:
+    api-key: ""           # Anthropic Claude key
+  hunyuan:
+    api-key: ""           # 腾讯混元 key（OpenAI 兼容协议）
+  deepseek:
+    api-key: ""           # DeepSeek key（OpenAI 兼容协议）
